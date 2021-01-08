@@ -1,21 +1,24 @@
 ﻿using NUnit.Framework;
 using System;
-using Timesheet.Api.Models;
-using Timesheet.Api.Services;
+using Timesheet.Application.Services;
+using Timesheet.Domain.Models;
 
 namespace Timesheet.Tests
 {
     class TimesheetServiceTest
     {
-        [Test]
-        public void TrackTime_ShouldReturnTrue()
+        [TestCase(12, "Сидоров")]
+        [TestCase(21, "Иванов")]
+        public void TrackTime_ShouldReturnTrue(short hours, string lastName)
         {
             //arrange
+           UserSession.Sessions.Add(lastName);
+
             var timeLog = new TimeLog
             {
-                Data = new DateTime(),
-                WorkingTimeHours = 1,
-                LastName = ""
+                Date = new DateTime(),
+                WorkingTimeHours = hours,
+                LastName = lastName
             };
 
             var service = new TimesheetService();
@@ -27,15 +30,21 @@ namespace Timesheet.Tests
             Assert.IsTrue(result);
         }
 
-        [Test]
-        public void TrackTime_ShouldReturnFalse()
+        [TestCase(25, "")]
+        [TestCase(0, null)]
+        [TestCase(-1, "")]
+        [TestCase(-1, "TestUser")]
+        [TestCase(0, null)]
+        [TestCase(4, "")]
+        [TestCase(4, null)]
+        public void TrackTime_ShouldReturnFalse(short hours, string lastName)
         {
             //arrange
             var timeLog = new TimeLog
             {
-                Data = new DateTime(),
-                WorkingTimeHours = 1,
-                LastName = ""
+                Date = new DateTime(),
+                WorkingTimeHours = hours,
+                LastName = lastName
             };
 
             var service = new TimesheetService();

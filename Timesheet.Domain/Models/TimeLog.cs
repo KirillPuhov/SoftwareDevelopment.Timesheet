@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Timesheet.Api.Models
+namespace Timesheet.Domain.Models
 {
     public class TimeLog
     {
-        public DateTime Data { get; set; }
+        public DateTime Date { get; set; }
 
         public int WorkingTimeHours { get; set; }
 

@@ -4,5 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Timesheet.Application\Timesheet.Application.csproj" />
+    <ProjectReference Include="..\Timesheet.DataAccess.csv\Timesheet.DataAccess.csv.csproj" />
+    <ProjectReference Include="..\Timesheet.Domain\Timesheet.Domain.csproj" />
+  </ItemGroup>
+
 
 </Project>
