@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Timesheet.Api.ResourceModels;
 using Timesheet.Domain;
 using Timesheet.Domain.Models;
 
@@ -15,9 +16,9 @@ namespace Timesheet.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<EmployeeReport> Report(string lastName)
+        public ActionResult<EmployeeReport> Report(LoginRequest request)
         {
-            return _reportService.GetEmployeeReport(lastName);
+            return _reportService.GetEmployeeReport(request.LastName);
         }
     }
 }

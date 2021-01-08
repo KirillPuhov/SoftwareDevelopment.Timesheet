@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Timesheet.Domain;
 using Timesheet.Domain.Models;
 
@@ -7,32 +6,11 @@ namespace Timesheet.Application.Services
 {
     public sealed class AuthService : IAuthService
     {
-        public AuthService()
+        IEmployeeRepository _employeeRepository;
+        public AuthService(IEmployeeRepository employeeRepository)
         {
-            Emloyees.Add(new Employee()
-            {
-                LastName = "Иванов",
-                Post = "Сотрудник",
-                Rate = 120000
-            });
-
-            Emloyees.Add(new Employee()
-            {
-                LastName = "Петров",
-                Post = "Сотрудник",
-                Rate = 100000
-            });
-
-            Emloyees.Add(new Employee()
-            {
-                LastName = "Сидоров",
-                Post = "Сотрудник",
-                Rate = 125000
-            });
-
+            _employeeRepository = employeeRepository;
         }
-
-        public List<Employee> Emloyees = new List<Employee>();
 
         public bool Login(string lastName)
         {
@@ -41,7 +19,8 @@ namespace Timesheet.Application.Services
                 return false;
             }
 
-            bool isEmployeeExist = Emloyees.Exists(x => x.LastName == lastName);
+            var staffEmployee = _employeeRepository.GetEmployee(lastName);
+            var isEmployeeExist = staffEmployee != null;
 
             if (isEmployeeExist)
             {
@@ -53,7 +32,7 @@ namespace Timesheet.Application.Services
 
         public Employee GetEmployee(string lastName)
         {
-            var targetEmployee = Emloyees.Find(x => x.LastName == lastName);
+            var targetEmployee = _employeeRepository.GetEmployee(lastName);
             return targetEmployee;
         }
     }

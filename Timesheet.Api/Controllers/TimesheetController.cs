@@ -9,14 +9,13 @@ namespace Timesheet.Api.Controllers
     public class TimesheetController : ControllerBase
     {
         private readonly ITimesheetService _timeSheetService;
-
         public TimesheetController(ITimesheetService timeSheetService)
         {
             _timeSheetService = timeSheetService;
         }
 
         [HttpPost]
-        public ActionResult<bool> TrackTime(TimeLog timeLog)
+        public ActionResult<bool> Add(TimeLog timeLog)
         {
             return Ok(_timeSheetService.TrackTime(timeLog));
         }

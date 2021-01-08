@@ -41,9 +41,9 @@ namespace Timesheet.DataAccess.csv
 
                     var dataMembers = dataRow.Split(_delimeter);
 
-                    timeLog.Date = DateTime.TryParse(dataMembers[1], out var date) ? date : new DateTime();
-                    timeLog.LastName = dataMembers[2];
-                    timeLog.WorkingTimeHours = int.TryParse(dataMembers[3], out var workingHours) ? workingHours : 0;
+                    timeLog.Date = DateTime.TryParse(dataMembers[0], out var date) ? date : new DateTime();
+                    timeLog.LastName = dataMembers[1];
+                    timeLog.WorkingTimeHours = int.TryParse(dataMembers[2], out var workingHours) ? workingHours : 0;
 
                     timeLogs.Add(timeLog);
                 }
