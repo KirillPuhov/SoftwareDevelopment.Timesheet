@@ -24,8 +24,8 @@ namespace Timesheet.Api
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
-            services.AddTransient<ITimesheetRepository, TimesheetRepository>();
             services.AddTransient<ITimesheetService, TimesheetService>();
+            services.AddTransient<ITimesheetRepository, TimesheetRepository>(); 
             services.AddTransient<IAuthService, AuthService>();
 
             services.AddSingleton(x => new CsvSettings(';', "..\\Timesheet.DataAccess.csv\\Data"));

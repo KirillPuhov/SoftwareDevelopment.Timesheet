@@ -14,11 +14,17 @@ namespace Timesheet.Application.Services
 
         public bool AddEmployee(Employee staffEmployee)
         {
-            bool isValid = !string.IsNullOrEmpty(staffEmployee.LastName) && staffEmployee.Rate > 0;
+            bool isValid = false;
 
-            if (isValid)
+            if (!string.IsNullOrEmpty(staffEmployee.LastName) 
+                        && !string.IsNullOrEmpty(staffEmployee.NameRole) 
+                        && staffEmployee.Bonus > 0 
+                        && staffEmployee.Bonus < int.MaxValue / 2 
+                        && staffEmployee.Salary > 0
+                        && staffEmployee.Salary < int.MaxValue / 2)
             {
                 _employeeRepository.AddEmployee(staffEmployee);
+                isValid = true;
             }
 
             return isValid;

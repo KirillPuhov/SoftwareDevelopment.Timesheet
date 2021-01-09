@@ -19,9 +19,9 @@ namespace Timesheet.DataAccess.csv
 
         public void Add(TimeLog timeLog)
         {
-            var dataRow = $"{timeLog.Date}{_delimeter}" +
-                          $"{timeLog.LastName}{_delimeter}" +
-                          $"{timeLog.WorkingTimeHours}\n";
+            var dataRow = $"{timeLog.LastName}{_delimeter}" +
+                          $"{timeLog.WorkingTimeHours}{_delimeter}" +
+                          $"{timeLog.Date}\n";
 
             File.AppendAllText(_path, dataRow);
         }
@@ -41,9 +41,9 @@ namespace Timesheet.DataAccess.csv
 
                     var dataMembers = dataRow.Split(_delimeter);
 
-                    timeLog.Date = DateTime.TryParse(dataMembers[0], out var date) ? date : new DateTime();
-                    timeLog.LastName = dataMembers[1];
-                    timeLog.WorkingTimeHours = int.TryParse(dataMembers[2], out var workingHours) ? workingHours : 0;
+                    timeLog.LastName = dataMembers[0];
+                    timeLog.WorkingTimeHours = int.TryParse(dataMembers[1], out var workingHours) ? workingHours : 0;
+                    timeLog.Date = DateTime.TryParse(dataMembers[2], out var date) ? date : new DateTime();                  
 
                     timeLogs.Add(timeLog);
                 }

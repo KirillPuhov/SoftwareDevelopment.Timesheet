@@ -7,8 +7,8 @@ namespace Timesheet.Application.Services
 {
     public class ReportService : IReportService
     {
-        private ITimesheetRepository _timesheetRepository;
-        private IAuthService _authService;
+        private readonly ITimesheetRepository _timesheetRepository;
+        private readonly IAuthService _authService;
 
         public ReportService(ITimesheetRepository timesheetRepository, IAuthService authService)
         {
@@ -27,7 +27,7 @@ namespace Timesheet.Application.Services
             {
                 hours += log.WorkingTimeHours;
             }
-            bill = hours * employee.Rate;
+            bill = hours/160 * employee.Salary;
 
             var result = new EmployeeReport
             {

@@ -20,7 +20,11 @@ namespace Timesheet.DataAccess.csv
 
         public void AddEmployee(Employee staffEmployee)
         {
-            var dataRow = $"{staffEmployee.LastName}{_delimeter}{staffEmployee.Post}{_delimeter}{staffEmployee.Rate}{_delimeter}\n";
+            var dataRow = $"{staffEmployee.LastName}{_delimeter}" +
+                          $"{staffEmployee.NameRole}{_delimeter}" +
+                          $"{staffEmployee.Bonus}{_delimeter}" +
+                          $"{staffEmployee.Salary}{_delimeter}\n";
+
             File.AppendAllText(_path, dataRow);
         }
 
@@ -39,8 +43,9 @@ namespace Timesheet.DataAccess.csv
                     staffEmployee = new Employee
                     {
                         LastName = dataMembers[0],
-                        Post = dataMembers[1],
-                        Rate = decimal.TryParse(dataMembers[2], out decimal salary) ? salary : 0
+                        NameRole = dataMembers[1],
+                        Bonus = decimal.TryParse(dataMembers[2], out var bouns) ? bouns : 0,
+                        Salary = decimal.TryParse(dataMembers[3], out var salary) ? salary : 0
                     };
 
                     break;
